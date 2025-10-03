@@ -8,14 +8,19 @@ import { globalStyles } from '../styles/globalStyles';
 const styles = globalStyles;
 
 export default function CameraScreen({ setViewMode, setCapturedPhoto }) {
+    // Gerencia a câmera ativa: "back" (traseira) ou "front" (frontal).
     const [facing, setFacing] = useState("back");
+    // Hook para solicitar e gerenciar as permissões da câmera.
     const [permission, requestPermission] = useCameraPermissions();
+    // Ref para acessar a instância da câmera e seus métodos.
     const cameraRef = useRef(null);
 
+    // Exibe uma tela vazia enquanto as permissões estão sendo carregadas.
     if (!permission) {
         return <View style={styles.container} />;
     }
 
+    // Se a permissão não foi concedida, exibe uma mensagem e um botão para solicitá-la.
     if (!permission.granted) {
         return (
             <View style={styles.container}>
@@ -25,17 +30,21 @@ export default function CameraScreen({ setViewMode, setCapturedPhoto }) {
         );
     }
 
+    // Alterna entre a câmera frontal e traseira.
     const toggleCameraFacing = () => {
         setFacing((current) => (current === "back" ? "front" : "back"));
     };
 
+    // Função assíncrona para tirar a foto.
     const takePicture = async () => {
         if (cameraRef.current) {
             try {
+                // Tira a foto e obtém um objeto com a URI.
                 const photo = await cameraRef.current.takePictureAsync({ quality: 0.8 });
                 if (!photo || !photo.uri) {
                     throw new Error("A URI da foto não foi gerada ou é inválida.");
                 }
+                // Salva a foto capturada no estado e muda a tela para o formulário.
                 setCapturedPhoto(photo);
                 setViewMode("form");
             } catch (error) {
@@ -48,7 +57,9 @@ export default function CameraScreen({ setViewMode, setCapturedPhoto }) {
 
     return (
         <View style={styles.container}>
+            {/* Componente CameraView para exibir a pré-visualização da câmera. */}
             <CameraView style={styles.camera} facing={facing} ref={cameraRef} />
+            {/* Botão para voltar ao álbum. */}
             <TouchableOpacity
                 style={styles.backCameraBtn}
                 onPress={() => setViewMode("album")}
@@ -57,9 +68,11 @@ export default function CameraScreen({ setViewMode, setCapturedPhoto }) {
             </TouchableOpacity>
             <View style={styles.controlsContainer}>
                 <View style={styles.controls}>
+                    {/* Botão para alternar a câmera. */}
                     <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
                         <Text style={styles.text}>Trocar Câmera</Text>
                     </TouchableOpacity>
+                    {/* Botão para tirar a foto. */}
                     <TouchableOpacity style={styles.button} onPress={takePicture}>
                         <Text style={styles.text}>Tirar Foto</Text>
                     </TouchableOpacity>

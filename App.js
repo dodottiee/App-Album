@@ -8,21 +8,27 @@ import CameraScreen from './components/CameraScreen';
 import PhotoFormScreen from './components/PhotoFormScreen';
 
 export default function App() {
+    // Gerencia qual tela está sendo exibida: "album", "camera" ou "form".
     const [viewMode, setViewMode] = useState("album");
+    // Armazena a lista de fotos obtidas da API.
     const [photos, setPhotos] = useState([]);
     
+    // Guarda a foto capturada pela câmera antes de ser salva ou editada.
     const [capturedPhoto, setCapturedPhoto] = useState(null);
     
+    // Gerencia o estado do formulário de foto, para edição ou nova foto.
     const [formState, setFormState] = useState({
-        id: null,
+        id: null, // ID da foto (null para nova foto, com ID para edição).
         titulo_foto: "",
         descricao_foto: "",
     });
 
+    // Hook useEffect para carregar as fotos quando o componente é montado.
     useEffect(() => {
         loadPhotos();
     }, []);
 
+    // Função assíncrona para buscar as fotos da API.
     const loadPhotos = async () => {
         try {
             const data = await fetchPhotos();
@@ -33,6 +39,7 @@ export default function App() {
         }
     };
 
+    // Prepara o estado do formulário para editar uma foto existente.
     const handleEditPhotoPress = (photo) => {
         setFormState({
             id: photo.id,
@@ -40,23 +47,26 @@ export default function App() {
             descricao_foto: photo.descricao_foto,
         });
         setCapturedPhoto({ uri: photo.uri }); 
-        setViewMode("form");
+        setViewMode("form"); // Altera para o modo de formulário.
     };
 
+    // Função para lidar com o envio do formulário, salvando ou atualizando a foto na API.
     const handleSubmitForm = async () => {
+        // Validação básica do título da foto.
         if (!formState.titulo_foto) {
              Alert.alert("Atenção", "O título da foto é obrigatório.");
              return;
         }
 
         try {
+            // Verifica se é uma edição (com ID) ou uma nova foto.
             if (formState.id) {
                 const updatedData = { 
                     ...formState, 
                     data_foto: new Date().toISOString(),
                     uri: capturedPhoto.uri 
                 };
-                await updatePhoto(updatedData);
+                await updatePhoto(updatedData); // Chama a função de atualização da API.
             } else {
                 const newPhoto = {
                     titulo_foto: formState.titulo_foto,
@@ -64,14 +74,14 @@ export default function App() {
                     data_foto: new Date().toISOString(),
                     uri: capturedPhoto.uri,
                 };
-                await addPhoto(newPhoto);
+                await addPhoto(newPhoto); // Chama a função de adição da API.
             }
             
-            // Limpa o estado e volta para o álbum
+            // Limpa o estado e volta para o álbum após o sucesso.
             setViewMode("album");
             setCapturedPhoto(null);
             setFormState({ id: null, titulo_foto: "", descricao_foto: "" });
-            loadPhotos();
+            loadPhotos(); // Recarrega a lista de fotos para atualizar a tela.
 
         } catch (error) {
             console.error("Erro ao salvar o formulário:", error);
@@ -79,6 +89,7 @@ export default function App() {
         }
     };
 
+    // Renderiza a tela correta com base no estado 'viewMode'.
     switch (viewMode) {
         case 'camera':
             return (
