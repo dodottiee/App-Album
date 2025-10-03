@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
-    // --- Estilos de Layout Gerais ---
     container: {
         flex: 1,
         backgroundColor: "#2c3e50",
@@ -14,7 +13,6 @@ export const globalStyles = StyleSheet.create({
         color: "#fff",
     },
 
-    // --- Estilos do Álbum ---
     albumTitle: {
         fontSize: 24,
         fontWeight: "bold",
@@ -89,7 +87,6 @@ export const globalStyles = StyleSheet.create({
         lineHeight: 30,
     },
 
-    // --- Estilos da Câmera ---
     camera: {
         flex: 1,
     },
@@ -132,7 +129,6 @@ export const globalStyles = StyleSheet.create({
         color: "white",
     },
 
-    // --- Estilos do Formulário ---
     formContainer: {
         flex: 1,
         backgroundColor: "#2c3e50",

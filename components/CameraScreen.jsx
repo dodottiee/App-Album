@@ -36,7 +36,6 @@ export default function CameraScreen({ setViewMode, setCapturedPhoto }) {
                 if (!photo || !photo.uri) {
                     throw new Error("A URI da foto não foi gerada ou é inválida.");
                 }
-                // Usa a URI original sem mover
                 setCapturedPhoto(photo);
                 setViewMode("form");
             } catch (error) {

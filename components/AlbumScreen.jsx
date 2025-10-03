@@ -20,15 +20,12 @@ export default function AlbumScreen({ photos, fetchPhotos, setViewMode, handleEd
                     style: "destructive",
                     onPress: async () => {
                         try {
-                            // Tenta excluir o arquivo físico usando a nova API
                             if (uri) {
                                 const file = new File(uri);
                                 await file.delete();
                             }
-                            // Exclui o registro da API
                             await deletePhotoFromApi(id);
                             
-                            // Atualiza a lista
                             fetchPhotos();
                         } catch (error) {
                             console.error("Erro ao excluir foto:", error);

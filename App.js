@@ -3,27 +3,22 @@ import { Alert } from "react-native";
 import { globalStyles } from './styles/globalStyles';
 import { fetchPhotos, addPhoto, updatePhoto } from './services/api';
 
-// Componentes de Tela
 import AlbumScreen from './components/AlbumScreen';
 import CameraScreen from './components/CameraScreen';
 import PhotoFormScreen from './components/PhotoFormScreen';
 
 export default function App() {
-    // Estado principal para navegação e dados
-    const [viewMode, setViewMode] = useState("album"); // 'album', 'camera', 'form'
+    const [viewMode, setViewMode] = useState("album");
     const [photos, setPhotos] = useState([]);
     
-    // Estado para a foto capturada (usada ao criar)
     const [capturedPhoto, setCapturedPhoto] = useState(null);
     
-    // Estado para o formulário (usado ao criar ou editar)
     const [formState, setFormState] = useState({
         id: null,
         titulo_foto: "",
         descricao_foto: "",
     });
 
-    // --- LÓGICA DE CARREGAMENTO DE DADOS ---
     useEffect(() => {
         loadPhotos();
     }, []);
@@ -38,16 +33,12 @@ export default function App() {
         }
     };
 
-    // --- MANIPULADORES DE EVENTOS ---
-
     const handleEditPhotoPress = (photo) => {
-        // Prepara o formulário com os dados da foto para edição
         setFormState({
             id: photo.id,
             titulo_foto: photo.titulo_foto,
             descricao_foto: photo.descricao_foto,
         });
-        // Seta a URI da foto para exibição no formulário (mesmo em edição)
         setCapturedPhoto({ uri: photo.uri }); 
         setViewMode("form");
     };
@@ -60,7 +51,6 @@ export default function App() {
 
         try {
             if (formState.id) {
-                // Modo EDIÇÃO (UPDATE)
                 const updatedData = { 
                     ...formState, 
                     data_foto: new Date().toISOString(),
@@ -68,7 +58,6 @@ export default function App() {
                 };
                 await updatePhoto(updatedData);
             } else {
-                // Modo CRIAÇÃO (CREATE)
                 const newPhoto = {
                     titulo_foto: formState.titulo_foto,
                     descricao_foto: formState.descricao_foto,
@@ -89,8 +78,6 @@ export default function App() {
             Alert.alert("Erro", "Falha ao salvar a foto na API.");
         }
     };
-
-    // --- RENDERIZAÇÃO CONDICIONAL DA TELA ---
 
     switch (viewMode) {
         case 'camera':
