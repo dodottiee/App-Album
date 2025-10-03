@@ -1,0 +1,25 @@
+{
+  "photos": [
+    {
+      "id": "b313",
+      "titulo_foto": "Dbdbd",
+      "descricao_foto": "Dhshsb\n",
+      "data_foto": "2025-10-03T22:50:38.326Z",
+      "uri": "file:///data/user/0/host.exp.exponent/cache/Camera/8e425dc0-b0b0-4e59-a70e-25b0c3cd291c.jpg"
+    },
+    {
+      "id": "f523",
+      "titulo_foto": "Teste",
+      "descricao_foto": "Teste",
+      "data_foto": "2025-10-03T22:51:14.551Z",
+      "uri": "file:///data/user/0/host.exp.exponent/cache/Camera/8b419758-5903-487e-9a30-78ac896c26a3.jpg"
+    },
+    {
+      "id": "d2ed",
+      "titulo_foto": "DEU CERTO",
+      "descricao_foto": "yeyyyy",
+      "data_foto": "2025-10-03T22:51:59.408Z",
+      "uri": "file:///var/mobile/Containers/Data/Application/155AC74F-D7EB-4BEA-B03C-7342B597565C/Library/Caches/ExponentExperienceData/@anonymous/App-Album-cf3c0cd0-7b29-4f13-9a80-eb8bed9efc98/Camera/A8CF88AF-7349-4DEF-8C72-39BD0A433749.jpg"
+    }
+  ]
+}
