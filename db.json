@@ -1,18 +1,5 @@
 {
   "photos": [
-    {
-      "id": "d2ed",
-      "titulo_foto": "DEU CERTO",
-      "descricao_foto": "yeyyyy",
-      "data_foto": "2025-10-03T22:51:59.408Z",
-      "uri": "file:///var/mobile/Containers/Data/Application/155AC74F-D7EB-4BEA-B03C-7342B597565C/Library/Caches/ExponentExperienceData/@anonymous/App-Album-cf3c0cd0-7b29-4f13-9a80-eb8bed9efc98/Camera/A8CF88AF-7349-4DEF-8C72-39BD0A433749.jpg"
-    },
-    {
-      "id": "eafc",
-      "titulo_foto": "Hehshs",
-      "descricao_foto": "Hshshs",
-      "data_foto": "2025-10-03T23:42:54.215Z",
-      "uri": "file:///data/user/0/host.exp.exponent/cache/Camera/acb05659-8fa8-4217-9ae8-b293fa93a83f.jpg"
-    }
+    
   ]
 }
